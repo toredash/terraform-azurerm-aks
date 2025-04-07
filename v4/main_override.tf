@@ -4,6 +4,10 @@ resource "azurerm_kubernetes_cluster" "main" {
   automatic_upgrade_channel = var.automatic_channel_upgrade
   node_os_upgrade_channel   = var.node_os_channel_upgrade
 
+  upgrade_override {
+    force_upgrade_enabled = false
+  }
+
   dynamic "default_node_pool" {
     for_each = var.enable_auto_scaling == true ? [] : ["default_node_pool_manually_scaled"]
 
